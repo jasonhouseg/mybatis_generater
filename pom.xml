@@ -75,13 +75,12 @@
             <overwrite>true</overwrite>
             <!-- 自动生成所需的的配置文件 -->
             <configurationFile>
-            src/main/resources/mybatis-generator.xml
-            <!--src/main/resources/generatorConfig_mysql.xml-->
+                src/main/resources/mybatis-generator.xml
             </configurationFile>
-            <!-- 多数据源需要配置多个，方便生成代码的时候使用，该配置文件一个数据源一个，切换配置文件就可以生成对应的数据源的代码了 -->
-            <!-- <configurationFile>
-            src/main/resources/mybatis-generator/generatorConfig-student.xml
-            </configurationFile>   -->
+            <!-- 多数据源需要配置多个，方便生成代码的时候使用，该配置文件一个数据源一个，切换配置文件就可以生成对应的数据源的代码了。一次只能生成一个configuration -->
+            <!--<configurationFile>
+                 src/main/resources/generatorConfig_mysql.xml
+            </configurationFile>-->
             </configuration>
             </plugin>
             <!--mybatis自动生成mapper和been插件================== end-->
