@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.IcAnnouncePermitMapper">
+  <resultMap id="BaseResultMap" type="model.IcAnnouncePermit">
+    <id column="PERMIT_ID" jdbcType="DECIMAL" property="permitId" />
+    <result column="ANNOUNCE_ID" jdbcType="DECIMAL" property="announceId" />
+    <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PERMIT_ID, ANNOUNCE_ID, USER_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from AWJ_MALL.IC_ANNOUNCE_PERMIT
+    where PERMIT_ID = #{permitId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from AWJ_MALL.IC_ANNOUNCE_PERMIT
+    where PERMIT_ID = #{permitId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="model.IcAnnouncePermit">
+    insert into AWJ_MALL.IC_ANNOUNCE_PERMIT (PERMIT_ID, ANNOUNCE_ID, USER_TYPE
+      )
+    values (#{permitId,jdbcType=DECIMAL}, #{announceId,jdbcType=DECIMAL}, #{userType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.IcAnnouncePermit">
+    insert into AWJ_MALL.IC_ANNOUNCE_PERMIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="permitId != null">
+        PERMIT_ID,
+      </if>
+      <if test="announceId != null">
+        ANNOUNCE_ID,
+      </if>
+      <if test="userType != null">
+        USER_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="permitId != null">
+        #{permitId,jdbcType=DECIMAL},
+      </if>
+      <if test="announceId != null">
+        #{announceId,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.IcAnnouncePermit">
+    update AWJ_MALL.IC_ANNOUNCE_PERMIT
+    <set>
+      <if test="announceId != null">
+        ANNOUNCE_ID = #{announceId,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PERMIT_ID = #{permitId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.IcAnnouncePermit">
+    update AWJ_MALL.IC_ANNOUNCE_PERMIT
+    set ANNOUNCE_ID = #{announceId,jdbcType=DECIMAL},
+      USER_TYPE = #{userType,jdbcType=VARCHAR}
+    where PERMIT_ID = #{permitId,jdbcType=DECIMAL}
+  </update>
+</mapper>

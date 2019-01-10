@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- mysql/oracle驱动的jar文件路径,需根据实际情况修改；如果IDE(eclipse或者idea) 项目里导入了jar包，那么就不需要配置了jar包的绝对路径了 -->
+    <classPathEntry location="E:\javaWeb\repository\com\oracle\ojdbc6\11.2.0.4.0\ojdbc6-11.2.0.4.0.jar"/>
+
+    <context id="Oracle" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库相关配置,需根据实际情况修改 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"  connectionURL="jdbc:oracle:thin:@192.168.1.247:1521:ORCL" userId="awj_mall" password="awj_mall"/>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 配置pojo目录,需根据实际情况修改 -->
+        <javaModelGenerator targetPackage="model" targetProject="G:\workPorj\mybatis_generater\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaModelGenerator>
+
+        <!-- 配置xml映射目录,需根据实际情况修改-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="G:\workPorj\mybatis_generater\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- 配置dao目录,需根据实际情况修改 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="dao.mapper" targetProject="G:\workPorj\mybatis_generater\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- tableName是数据库中的表名，domainObjectName是生成的JAVA模型名，后面的参数不用改，要生成更多的表就在下面继续加table标签,需根据实际情况修改 -->
+        <!--<table tableName="mi_role" domainObjectName="MiRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="mi_role_power" domainObjectName="MiRolePower" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="mi_module" domainObjectName="MiModule" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="mi_member_login_log" domainObjectName="MiMemberLoginLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+       -->
+        <table tableName="ic_announce" schema="awj_mall" domainObjectName="IcAnnounce" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="ic_announce_permit" schema="awj_mall" domainObjectName="IcAnnouncePermit" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="ic_index_pic" schema="awj_mall" domainObjectName="IcIndexPic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="ic_information" schema="awj_mall" domainObjectName="IcInformation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="ic_one_page" schema="awj_mall" domainObjectName="IcOnePage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <!--tableName="%"表示一次性生成对应数据库里所有的表-->
+        <!--<table tableName="%" schema="awj_mall" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+    </context>
+</generatorConfiguration>

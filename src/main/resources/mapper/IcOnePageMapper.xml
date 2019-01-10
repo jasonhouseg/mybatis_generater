@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.IcOnePageMapper">
+  <resultMap id="BaseResultMap" type="model.IcOnePage">
+    <id column="PAGE_ID" jdbcType="DECIMAL" property="pageId" />
+    <result column="PAGE_CODE" jdbcType="VARCHAR" property="pageCode" />
+    <result column="LANG_CODE" jdbcType="VARCHAR" property="langCode" />
+    <result column="PAGE_TITLE" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATOR_CODE" jdbcType="VARCHAR" property="creatorCode" />
+    <result column="EDIT_TIME" jdbcType="TIMESTAMP" property="editTime" />
+    <result column="EDITOR_CODE" jdbcType="VARCHAR" property="editorCode" />
+    <result column="COMPANY_CODE" jdbcType="VARCHAR" property="companyCode" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="model.IcOnePage">
+    <result column="PAGE_TEXT" jdbcType="CLOB" property="pageText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PAGE_ID, PAGE_CODE, LANG_CODE, PAGE_TITLE, CREATE_TIME, CREATOR_CODE, EDIT_TIME, 
+    EDITOR_CODE, COMPANY_CODE
+  </sql>
+  <sql id="Blob_Column_List">
+    PAGE_TEXT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from AWJ_MALL.IC_ONE_PAGE
+    where PAGE_ID = #{pageId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from AWJ_MALL.IC_ONE_PAGE
+    where PAGE_ID = #{pageId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="model.IcOnePage">
+    insert into AWJ_MALL.IC_ONE_PAGE (PAGE_ID, PAGE_CODE, LANG_CODE, 
+      PAGE_TITLE, CREATE_TIME, CREATOR_CODE, 
+      EDIT_TIME, EDITOR_CODE, COMPANY_CODE, 
+      PAGE_TEXT)
+    values (#{pageId,jdbcType=DECIMAL}, #{pageCode,jdbcType=VARCHAR}, #{langCode,jdbcType=VARCHAR}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creatorCode,jdbcType=VARCHAR}, 
+      #{editTime,jdbcType=TIMESTAMP}, #{editorCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, 
+      #{pageText,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="model.IcOnePage">
+    insert into AWJ_MALL.IC_ONE_PAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pageId != null">
+        PAGE_ID,
+      </if>
+      <if test="pageCode != null">
+        PAGE_CODE,
+      </if>
+      <if test="langCode != null">
+        LANG_CODE,
+      </if>
+      <if test="pageTitle != null">
+        PAGE_TITLE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="creatorCode != null">
+        CREATOR_CODE,
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME,
+      </if>
+      <if test="editorCode != null">
+        EDITOR_CODE,
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE,
+      </if>
+      <if test="pageText != null">
+        PAGE_TEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pageId != null">
+        #{pageId,jdbcType=DECIMAL},
+      </if>
+      <if test="pageCode != null">
+        #{pageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="langCode != null">
+        #{langCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editorCode != null">
+        #{editorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pageText != null">
+        #{pageText,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.IcOnePage">
+    update AWJ_MALL.IC_ONE_PAGE
+    <set>
+      <if test="pageCode != null">
+        PAGE_CODE = #{pageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="langCode != null">
+        LANG_CODE = #{langCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pageTitle != null">
+        PAGE_TITLE = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorCode != null">
+        CREATOR_CODE = #{creatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editorCode != null">
+        EDITOR_CODE = #{editorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pageText != null">
+        PAGE_TEXT = #{pageText,jdbcType=CLOB},
+      </if>
+    </set>
+    where PAGE_ID = #{pageId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="model.IcOnePage">
+    update AWJ_MALL.IC_ONE_PAGE
+    set PAGE_CODE = #{pageCode,jdbcType=VARCHAR},
+      LANG_CODE = #{langCode,jdbcType=VARCHAR},
+      PAGE_TITLE = #{pageTitle,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_CODE = #{creatorCode,jdbcType=VARCHAR},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      EDITOR_CODE = #{editorCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      PAGE_TEXT = #{pageText,jdbcType=CLOB}
+    where PAGE_ID = #{pageId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.IcOnePage">
+    update AWJ_MALL.IC_ONE_PAGE
+    set PAGE_CODE = #{pageCode,jdbcType=VARCHAR},
+      LANG_CODE = #{langCode,jdbcType=VARCHAR},
+      PAGE_TITLE = #{pageTitle,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_CODE = #{creatorCode,jdbcType=VARCHAR},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      EDITOR_CODE = #{editorCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+    where PAGE_ID = #{pageId,jdbcType=DECIMAL}
+  </update>
+</mapper>

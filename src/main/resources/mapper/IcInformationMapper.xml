@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.IcInformationMapper">
+  <resultMap id="BaseResultMap" type="model.IcInformation">
+    <id column="UNI_NO" jdbcType="DECIMAL" property="uniNo" />
+    <result column="INFOR_TYPE" jdbcType="DECIMAL" property="inforType" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="REPLY_CONTENT" jdbcType="VARCHAR" property="replyContent" />
+    <result column="REPLY_USER" jdbcType="VARCHAR" property="replyUser" />
+    <result column="REPLY_NAME" jdbcType="VARCHAR" property="replyName" />
+    <result column="REPLY_TIME" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="CHECK_USER" jdbcType="VARCHAR" property="checkUser" />
+    <result column="CHECK_NAME" jdbcType="VARCHAR" property="checkName" />
+    <result column="CHECK_TIME" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="COMPANY_CODE" jdbcType="VARCHAR" property="companyCode" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="SEND_ROUTE" jdbcType="DECIMAL" property="sendRoute" />
+    <result column="IPADDRESS" jdbcType="VARCHAR" property="ipaddress" />
+    <result column="IPADDRESS_REPLY" jdbcType="VARCHAR" property="ipaddressReply" />
+    <result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UNI_NO, INFOR_TYPE, TITLE, CONTENT, CREATE_USER, CREATE_NAME, CREATE_TIME, REPLY_CONTENT, 
+    REPLY_USER, REPLY_NAME, REPLY_TIME, CHECK_USER, CHECK_NAME, CHECK_TIME, COMPANY_CODE, 
+    STATUS, SEND_ROUTE, IPADDRESS, IPADDRESS_REPLY, USER_CODE, USER_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from AWJ_MALL.IC_INFORMATION
+    where UNI_NO = #{uniNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from AWJ_MALL.IC_INFORMATION
+    where UNI_NO = #{uniNo,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="model.IcInformation">
+    insert into AWJ_MALL.IC_INFORMATION (UNI_NO, INFOR_TYPE, TITLE, 
+      CONTENT, CREATE_USER, CREATE_NAME, 
+      CREATE_TIME, REPLY_CONTENT, REPLY_USER, 
+      REPLY_NAME, REPLY_TIME, CHECK_USER, 
+      CHECK_NAME, CHECK_TIME, COMPANY_CODE, 
+      STATUS, SEND_ROUTE, IPADDRESS, 
+      IPADDRESS_REPLY, USER_CODE, USER_NAME
+      )
+    values (#{uniNo,jdbcType=DECIMAL}, #{inforType,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{replyContent,jdbcType=VARCHAR}, #{replyUser,jdbcType=VARCHAR}, 
+      #{replyName,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP}, #{checkUser,jdbcType=VARCHAR}, 
+      #{checkName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP}, #{companyCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=DECIMAL}, #{sendRoute,jdbcType=DECIMAL}, #{ipaddress,jdbcType=VARCHAR}, 
+      #{ipaddressReply,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.IcInformation">
+    insert into AWJ_MALL.IC_INFORMATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uniNo != null">
+        UNI_NO,
+      </if>
+      <if test="inforType != null">
+        INFOR_TYPE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="createName != null">
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="replyContent != null">
+        REPLY_CONTENT,
+      </if>
+      <if test="replyUser != null">
+        REPLY_USER,
+      </if>
+      <if test="replyName != null">
+        REPLY_NAME,
+      </if>
+      <if test="replyTime != null">
+        REPLY_TIME,
+      </if>
+      <if test="checkUser != null">
+        CHECK_USER,
+      </if>
+      <if test="checkName != null">
+        CHECK_NAME,
+      </if>
+      <if test="checkTime != null">
+        CHECK_TIME,
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sendRoute != null">
+        SEND_ROUTE,
+      </if>
+      <if test="ipaddress != null">
+        IPADDRESS,
+      </if>
+      <if test="ipaddressReply != null">
+        IPADDRESS_REPLY,
+      </if>
+      <if test="userCode != null">
+        USER_CODE,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uniNo != null">
+        #{uniNo,jdbcType=DECIMAL},
+      </if>
+      <if test="inforType != null">
+        #{inforType,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyContent != null">
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUser != null">
+        #{replyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="replyName != null">
+        #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null">
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkUser != null">
+        #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkName != null">
+        #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sendRoute != null">
+        #{sendRoute,jdbcType=DECIMAL},
+      </if>
+      <if test="ipaddress != null">
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddressReply != null">
+        #{ipaddressReply,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.IcInformation">
+    update AWJ_MALL.IC_INFORMATION
+    <set>
+      <if test="inforType != null">
+        INFOR_TYPE = #{inforType,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyContent != null">
+        REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUser != null">
+        REPLY_USER = #{replyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="replyName != null">
+        REPLY_NAME = #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null">
+        REPLY_TIME = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkUser != null">
+        CHECK_USER = #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkName != null">
+        CHECK_NAME = #{checkName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        CHECK_TIME = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sendRoute != null">
+        SEND_ROUTE = #{sendRoute,jdbcType=DECIMAL},
+      </if>
+      <if test="ipaddress != null">
+        IPADDRESS = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddressReply != null">
+        IPADDRESS_REPLY = #{ipaddressReply,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UNI_NO = #{uniNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.IcInformation">
+    update AWJ_MALL.IC_INFORMATION
+    set INFOR_TYPE = #{inforType,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      REPLY_USER = #{replyUser,jdbcType=VARCHAR},
+      REPLY_NAME = #{replyName,jdbcType=VARCHAR},
+      REPLY_TIME = #{replyTime,jdbcType=TIMESTAMP},
+      CHECK_USER = #{checkUser,jdbcType=VARCHAR},
+      CHECK_NAME = #{checkName,jdbcType=VARCHAR},
+      CHECK_TIME = #{checkTime,jdbcType=TIMESTAMP},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      SEND_ROUTE = #{sendRoute,jdbcType=DECIMAL},
+      IPADDRESS = #{ipaddress,jdbcType=VARCHAR},
+      IPADDRESS_REPLY = #{ipaddressReply,jdbcType=VARCHAR},
+      USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR}
+    where UNI_NO = #{uniNo,jdbcType=DECIMAL}
+  </update>
+</mapper>
