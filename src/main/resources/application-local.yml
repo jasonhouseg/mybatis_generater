@@ -1,0 +1,53 @@
+#zipkin服务跟踪配置和数据库配置
+spring:
+  zipkin:
+    base-url: http://localhost:10411
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:1521:ORCL
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: awj_mall
+    password: awj_mall
+#redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+# 连接超时时间（毫秒）
+    lettuce:
+      timeout: 10000
+# 连接池最大连接数（使用负值表示没有限制） 默认 8
+      pool:
+        max-active: 8
+# 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+#spring.redis.lettuce.pool.max-wait=-1
+# 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+# 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+# Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
+      database: 0
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#mybatis mapper 路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#mybatis开启打印log
+logging:
+  path:
+    com.awj.service.product.dao.mapper:
+      level: debug
+#LogBack日志
+  config: classpath:logback-awj-service-product.xml
+#企叮咚配置
+qdd:
+  company: 68
+  key: (2018)!@#(0327)fdawj
+  imgUrl: http://tstatics.76sd.com
+  url: http://tshare.76sd.com
+#qdd:
+#  company: 60
+#  key: (2018)!@#(0910)fdawj
+#  imgUrl: http://statics.76sd.com
+#  url: http://share.76sd.com

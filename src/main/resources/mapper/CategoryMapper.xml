@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fn.dao.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.fn.model.Category">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category_
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--通过left join关联查询，对Category和Product表进行关联查询。
+  与前面学习的有所区别，这里不是用的resultType, 而是resultMap，通过resultMap把数据取出来放在对应的 对象属性里
+  注： Category的id 字段 和Product的id字段同名，Mybatis不知道谁是谁的，所以需要通过取别名cid,pid来区分。
+  name字段同理。-->
+  <resultMap type="com.fn.model.Category" id="categoryBean"><!--F:\prodemo\mybatis_generater\src\main\java\com\fn\model\Category.java-->
+    <id column="cid" property="id" />
+    <result column="cname" property="name" />
+    <!-- 一对多的关系 -->
+    <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+    <collection property="products" ofType="com.fn.model.Product">
+      <id column="pid" property="id" />
+      <result column="pname" property="name" />
+      <result column="price" property="price" />
+      <result column="p_cid" property="cid" />
+    </collection>
+  </resultMap>
+  <!-- 关联查询分类和产品表 -->
+  <select id="listCategory" resultMap="categoryBean">
+  /*【注意】：
+    1、列（别）名要与result的column对应，property要与实体类属性对于，最好复制粘贴
+    2、别名用单引号''包裹！！！
+  */
+--       select c.*, p.*, c.id 'cid', p.id 'pid', c.name 'cname', p.name 'pname', p.cid 'p_cid' from category_ c left join product_ p on c.id = p.cid
+      select c.id 'cid', c.name 'cname', p.id 'pid', p.name 'pname', p.cid 'p_cid' from category_ c left join product_ p on c.id = p.cid/*可查询部分字段，不查的字段则返回null*/
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category_
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fn.model.Category">
+    insert into category_ (id, name)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fn.model.Category">
+    insert into category_
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fn.model.Category">
+    update category_
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fn.model.Category">
+    update category_
+    set name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

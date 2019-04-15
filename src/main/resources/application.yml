@@ -1,0 +1,12 @@
+# 默认打开local配置&服务名：awj-service-product
+spring:
+  profiles:
+    active: dev
+  application:
+    name: mybatis_generater
+#  端口
+server:
+  port: 8088
+
+
+
